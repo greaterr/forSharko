@@ -1,14 +1,19 @@
 plugins {
     id 'java'
-    id 'war' // Оставьте этот плагин, если нужно собирать проект в WAR файл
+    id 'war'
+    id 'org.springframework.boot' version '3.3.3'
+    id 'io.spring.dependency-management' version '1.1.6'
 }
+
+
+
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21) // Можете изменить на нужную версию Java
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -17,15 +22,11 @@ repositories {
 }
 
 dependencies {
-    // Добавляем зависимости для обычного Spring Framework
-    implementation 'org.springframework:spring-webmvc:6.0.9' // Spring MVC
-    implementation 'org.springframework:spring-context:6.0.9' // Spring Context
-
-    // Зависимости для тестирования
-    testImplementation 'org.springframework:spring-test:6.0.9'
-    testImplementation 'junit:junit:4.13.2'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-    useJUnit()
+    useJUnitPlatform()
 }
